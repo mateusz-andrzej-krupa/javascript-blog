@@ -6,6 +6,7 @@
   */
 
 const titleClickHandler = function(){
+    event.preventDefault(); //blokada przewijania strony do #
     const clickedElement = this;
     console.log('Link was clicked!');
     console.log(event);
@@ -18,7 +19,7 @@ const titleClickHandler = function(){
     activeLink.classList.remove('active');
     }
 
-  /* [IN PROGRESS] add class 'active' to the clicked link */
+  /* [DONE] add class 'active' to the clicked link */
 
   console.log('clickedElement', clickedElement);
   //console.log('clickedElement+: ' + clickedElement);
@@ -32,12 +33,19 @@ const titleClickHandler = function(){
     activeArticle.classList.remove('active');
     }
 
-  /* get 'href' attribute from the clicked link */
+  /* [DONE] get 'href' attribute from the clicked link */
 
-  /* find the correct article using the selector (value of 'href' attribute) */
+  const hrefPage = clickedElement.getAttribute('href');
+  console.log(hrefPage);
 
-  /* add class 'active' to the correct article */
+  /* [DONE] find the correct article using the selector (value of 'href' attribute) */
+
+  const article = document.querySelector(hrefPage);
+  console.log(article)
+
+  /* [DONE] add class 'active' to the correct article */
     
+  article.classList.add('active');
 
 }
   
