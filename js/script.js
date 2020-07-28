@@ -1,4 +1,5 @@
 'use strict';
+{
 /*document.getElementById('test-button').addEventListener('click', function(){
     const links = document.querySelectorAll('.titles a');
     console.log('links:', links);
@@ -6,8 +7,8 @@
   */
 
 const titleClickHandler = function(){
-    event.preventDefault(); //blokada przewijania strony do #
-    const clickedElement = this;
+    event.preventDefault(); //ok-blokada przewijania strony do #
+    const clickedElement = this; //do czego to służy?
     console.log('Link was clicked!');
     console.log(event);
 
@@ -21,8 +22,7 @@ const titleClickHandler = function(){
 
   /* [DONE] add class 'active' to the clicked link */
 
-  console.log('clickedElement', clickedElement);
-  //console.log('clickedElement+: ' + clickedElement);
+  console.log('clickedElement', clickedElement);  //console.log('clickedElement+: ' + clickedElement);
   clickedElement.classList.add('active');
 
   /* [DONE] remove class 'active' from all articles */
@@ -35,12 +35,12 @@ const titleClickHandler = function(){
 
   /* [DONE] get 'href' attribute from the clicked link */
 
-  const hrefPage = clickedElement.getAttribute('href');
-  console.log(hrefPage);
+  const articleHref = clickedElement.getAttribute('href');
+  console.log('this is a articleHref:' , articleHref);
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
 
-  const article = document.querySelector(hrefPage);
+  const article = document.querySelector(articleHref); //tego nie kumam
   console.log(article)
 
   /* [DONE] add class 'active' to the correct article */
@@ -53,4 +53,30 @@ const links = document.querySelectorAll('.titles a');
 
 for(let link of links){
     link.addEventListener('click', titleClickHandler);
+}
+
+// [FROM KODILLA]
+//const optArticleSelector = '.post',
+ // optTitleSelector = '.post-title',
+ // optTitleListSelector = '.titles';
+
+ /* const generateTitleLinks = function(){
+    console.log('test dla funkcji stałej');
+  }
+generateTitleLinks();
+*/
+
+// [MYSELF]
+function generateTitleLinks(){
+  console.log('link-generator-tested');
+
+  /* [IN PROGRESS] clear left panel - remove links list constent */
+  /* [QUERRY] for all articles - get a id of artcle and save as a const */
+  /* [QUERRY] for all articles - find 'title' of artile save as a const */
+  /* [QUERRY] for all articles - generate HTML code and save as a const */
+  /* [QUERRY] for all articles - display HTML code in a left column */
+  }
+
+generateTitleLinks();
+
 }
