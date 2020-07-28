@@ -10,12 +10,11 @@ const titleClickHandler = function(){
     event.preventDefault(); //ok-blokada przewijania strony do #
     const clickedElement = this; //do czego to służy?
     console.log('Link was clicked!');
-    console.log(event);
+    console.log('event', event);
 
   /* [DONE] remove class 'active' from all article links  */
   
   const activeLinks = document.querySelectorAll('.titles a.active');
-
   for(let activeLink of activeLinks){
     activeLink.classList.remove('active');
     }
@@ -28,7 +27,6 @@ const titleClickHandler = function(){
   /* [DONE] remove class 'active' from all articles */
   
   const activeArticles = document.querySelectorAll('article.active');
-
   for(let activeArticle of activeArticles){
     activeArticle.classList.remove('active');
     }
@@ -50,28 +48,25 @@ const titleClickHandler = function(){
 }
   
 const links = document.querySelectorAll('.titles a');
-
 for(let link of links){
     link.addEventListener('click', titleClickHandler);
 }
 
 // [FROM KODILLA]
-//const optArticleSelector = '.post',
- // optTitleSelector = '.post-title',
- // optTitleListSelector = '.titles';
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
 
- /* const generateTitleLinks = function(){
-    console.log('test dla funkcji stałej');
-  }
-generateTitleLinks();
-*/
-
-// [MYSELF]
 function generateTitleLinks(){
-  console.log('link-generator-tested');
+//  console.log('leftLinksGenerator-tested');
 
-  /* [IN PROGRESS] clear left panel - remove links list constent */
-  /* [QUERRY] for all articles - get a id of artcle and save as a const */
+  /* [DONE] clear left panel - remove links list constent */
+  
+  const titleLinks = document.querySelector('.titles');
+  titleLinks.innerHTML = '';
+
+  /* [IN PROCESS] for all articles - get a id of article and save as a const */
+
   /* [QUERRY] for all articles - find 'title' of artile save as a const */
   /* [QUERRY] for all articles - generate HTML code and save as a const */
   /* [QUERRY] for all articles - display HTML code in a left column */
