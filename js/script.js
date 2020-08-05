@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 {
 
   /* [DONE] Click listener on lef column */
@@ -158,5 +158,64 @@
   
   generateTags();
   
+  /* ----------------------------- */
+
+  const tagClickHandler = function(){
+    /* [DONE] prevent default action for this event */
+    event.preventDefault();
+    //console.log('event', event);
+
+    /* [DONE] make new constant named "clickedElement" and give it the value of "this" */
+    const clickedElement = this;
+    //console.log('this', clickedElement);
+
+    /* [DONE] make a new constant "href" and read the attribute "href" of the clicked element */
+    const href = clickedElement.getAttribute('href');
+    //console.log('href to: ', href);
+
+    /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
+    const tag = href.replace('#', '');
+    //console.log('tagi bez #: ', tag);
+
+    /* [TO CORRECT] find all tag links with class active */
+    const tagActive = document.querySelectorAll('.post-tags a.active[href^="#"]');
+    console.log('tagi aktywne: ', tagActive); // !!! wyswietla błedną wartość !!!
+
+    /* [TO CORRECT] START LOOP: for each active tag link */ 
+    //for (const tagDeactive in tagActive){
+
+    /* [TO CORRECT] remove class active */
+    //tagDeactive.classList.remove('active');
+    //console.log('deaktywne taGi: ', tagDeactive);
+
+    /* [OK] END LOOP: for each active tag link */
+    //}
+
+    /* [] find all tag links with "href" attribute equal to the "href" constant */
+
+    /* [] START LOOP: for each found tag link */
+
+    /* [] add class active */
+
+    /* [] END LOOP: for each found tag link */
+
+    /* [] execute function "generateTitleLinks" with article selector as argument */
+  };
+
+  const tags = document.querySelectorAll('.post-tags a');
+  //console.log('tagi:', tags);
+  for(let tag of tags){
+    tag.addEventListener('click', tagClickHandler);
+  }
+  //function addClickListenersToTags(){
+  /* [] find all links to tags */
+
+  /* [] START LOOP: for each link */
+
+  /* [] add tagClickHandler as event listener for that link */
+
+  /* [] END LOOP: for each link */
+  //}
   
+  // addClickListenersToTags();
 }
