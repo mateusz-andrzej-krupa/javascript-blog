@@ -134,15 +134,15 @@
       const tagsArray = tags.split(' ');
       //console.log('tagsArray: ', tagsArray);
   
-      /* START LOOP: for each tag */
+      /* [DONE] START LOOP: for each tag */
       for (let tag of tagsArray){
         
         /* [DONE] generate HTML of the link */
-        const taglink = '<li><a href="#' + tag + '">' + tag + '</a></li>';
+        const taglink = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
         //console.log('taglink', taglink);
         
         /* [DONE] add generated code to html variable */
-        html = html + taglink;
+        html = html + taglink + (' ');
         //console.log('htmllink', html);
 
       /* [OK] END LOOP: for each tag */
@@ -174,19 +174,19 @@
     //console.log('href to: ', href);
 
     /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
-    const tag = href.replace('#', '');
-    //console.log('tagi bez #: ', tag);
+    const tag = href.replace('#tag-', '');
+    //console.log('tag bez #: ', tag);
 
     /* [TO CORRECT] find all tag links with class active */
-    const tagActive = document.querySelectorAll('.post-tags a.active[href^="#"]');
-    console.log('tagi aktywne: ', tagActive); // !!! wyswietla błedną wartość !!!
+    const tagActive = document.querySelectorAll('a.active[href^="#tag-"]');
+    console.log('tagi aktywne: ', tagActive); // !!! wyswietla błedną wartość "NodeList []"" !!!
 
     /* [TO CORRECT] START LOOP: for each active tag link */ 
     //for (const tagDeactive in tagActive){
 
     /* [TO CORRECT] remove class active */
     //tagDeactive.classList.remove('active');
-    //console.log('deaktywne taGi: ', tagDeactive);
+    //console.log('deaktywne tagi: ', tagDeactive);
 
     /* [OK] END LOOP: for each active tag link */
     //}
@@ -214,7 +214,7 @@
 
   /* [] add tagClickHandler as event listener for that link */
 
-  /* [] END LOOP: for each link */
+  /* [OK] END LOOP: for each link */
   //}
   
   // addClickListenersToTags();
