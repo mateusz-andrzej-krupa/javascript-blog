@@ -171,15 +171,24 @@
     //console.log(articles);
     /* [OK] START LOOP: for every article: */
     for (let article of articles){
-      /* [DONE] find atribute post-author */
+      /* [DONE] find author wrapper */
+      const authorWrapper = document.querySelector(optArticleAuthorSelector);
+      //console.log('wrappery autorow: ', authorWrapper);
+      /* [DONE] make html variable with empty string */
+      let html = '';
+      /* [DONE] get author from data-autor attribute */
       const articleAuthor = article.getAttribute('data-author');
       //console.log('autor to: ', articleAuthor);
-      /* insert HTML of all the links into the author wrapper */
-       
-      optArticleAuthorSelector.innerText =  articleAuthor;
-      console.log(optArticleAuthorSelector);
-
-      /* END LOOP: for every article: */
+      /* [DONE] generate HTML of the link */
+      const authorLink = '<p class="post-author">' + articleAuthor + '</p>';
+      console.log('linki dla autorow:', authorLink);
+      /* [DONE] add generated code to html variable */
+      html = html + authorLink;
+      //console.log('html dla autorow', html);
+      /* [DONE] insert HTML of all the links into the tags wrapper */
+      authorWrapper.innerHTML = html;
+      //console.log('html: ', html);
+      /* [OK] END LOOP: for every article: */
     }
   };
   generateAuthors();
