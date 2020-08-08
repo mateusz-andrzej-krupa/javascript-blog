@@ -1,5 +1,10 @@
 //'use strict';
 {
+  const optArticleSelector = '.post',
+    optTitleListSelector = '.titles',
+    optTitleSelector = '.post-title',
+    optArticleTagsSelector = '.post-tags .list',
+    optArticleAuthorSelector = '.post-author';
   /* [DONE] Click listener on lef column */
   const titleClickHandler = function(){
     //console.log('this: ', this);
@@ -31,10 +36,6 @@
   };
   /* [DONE] genertor links - left column */
   /*--------------------------- */
-  const optArticleSelector = '.post',
-    optTitleListSelector = '.titles',
-    optTitleSelector = '.post-title',
-    optArticleTagsSelector = '.post-tags .list';
   const generateTitleLinks = function (CustomSelector = ''){
   //  //console.log('leftLinksGenerator-tested');
     /* [DONE] clear left panel - remove links list constent */
@@ -120,7 +121,7 @@
     const href = clickedElement.getAttribute('href');
     //console.log('href to: ', href);
     /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
-    //const tag = href.replace('#tag-', '');
+    const tag = href.replace('#tag-', '');
     //console.log('tag bez #: ', tag);
     /* [DONE] find all tag links with class active */
     const tagActives = document.querySelectorAll('a.active[href^="#tag-"]');
@@ -144,7 +145,7 @@
     /* [OK] END LOOP: for each found tag link */
     }
     /* [] execute function "generateTitleLinks" with article selector as argument */
-    generateTitleLinks();
+    generateTitleLinks('[data-tags~="' + tag + '"]');
   };
   const tags = document.querySelectorAll('.post-tags a');
   //console.log('tagi:', tags);
@@ -163,4 +164,23 @@
     }
   };
   addClickListenersToTags();
+  /*-------------------*/
+  const generateAuthors = function(){
+  /* [PROC] find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+    //console.log(articles);
+    /* [OK] START LOOP: for every article: */
+    for (let article of articles){
+      /* [DONE] find atribute post-author */
+      const articleAuthor = article.getAttribute('data-author');
+      //console.log('autor to: ', articleAuthor);
+      /* insert HTML of all the links into the author wrapper */
+       
+      optArticleAuthorSelector.innerText =  articleAuthor;
+      console.log(optArticleAuthorSelector);
+
+      /* END LOOP: for every article: */
+    }
+  };
+  generateAuthors();
 }
