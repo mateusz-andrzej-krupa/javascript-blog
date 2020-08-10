@@ -173,7 +173,7 @@
     for (let article of articles){
       /* [---] find author wrapper */
       const authorWrapper = article.querySelector(optArticleAuthorSelector);
-      console.log('wrappery autorow: ', authorWrapper);
+      //console.log('wrappery autorow: ', authorWrapper);
       /* [DONE] make html variable with empty string */
       let html = '';
       /* [DONE] get author from data-autor attribute */
