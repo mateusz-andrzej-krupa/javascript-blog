@@ -126,7 +126,7 @@
     /* [DONE] find all tag links with class active */
     const tagActives = document.querySelectorAll('a.active[href^="#tag-"]');
     //console.log('tagi aktywne: ', tagActives); // !!! wyswietla wartość "NodeList []"" !!!
-    /* [process] START LOOP: for each active tag link */ 
+    /* [DONE] START LOOP: for each active tag link */ 
     for (const tagActive of tagActives){
       //console.log('test');
       /* [DONE] remove class active */
@@ -179,8 +179,11 @@
       /* [DONE] get author from data-autor attribute */
       const author = article.getAttribute('data-author');
       //console.log('autor to: ', author);
+      /* replace ' ' with '_'  in author name */
+      const author_name = author.replace(' ', '_');
+      //console.log(author_name);
       /* [DONE] generate HTML of the link */
-      const authorLink = '<a href="#author ' + author + '"> by: ' + author + '</a>';
+      const authorLink = '<a href="#author_' + author_name + '"> by: ' + author + '</a>';
       //console.log('linki dla autorow:', authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
@@ -202,22 +205,21 @@
     const href = clickedElement.getAttribute('href');
     //console.log('AUTHOR href to: ', href);
     const author = href.replace('#author', '');
-    //console.log('tagAtora bez #: ', author);
+    //console.log('Autor bez #: ', author);
     const authorActives = document.querySelectorAll('a.active[href^="#author"]');
     //console.log('autorzy aktywni: ', authorActives); // !!! wyswietla wartość "NodeList []"" !!!
-    for (let authorActive of authorActives){
-      //console.log('test petli');
-      authorActive.classList.remove('active');
-      //console.log('deaktywne tagiAutorow: ', authorActive);
+    for (let authorDeactive of authorActives){
+      authorDeactive.classList.remove('active');
+      //console.log('deaktywne tagiAutorow: ', authorDeactive); // wyswietla sie po drugim kliknieciu i wykonuje trzykrotnie; 
     }
     const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
     //console.log('equal', authorLinks);
     for (let authorLink of authorLinks){
       authorLink.classList.add('active');
-      //console.log('autorzy aktywni: ', authorLink);
+      console.log('autorzy aktywni: ', authorLink);
     }
     generateTitleLinks('[data-author="' + author + '"]');
-    console.log(generateTitleLinks);
+    //console.log(generateTitleLinks);
   };
   const Auhtors = document.querySelectorAll('.post-author a');
   //console.log('autorzy: :', Auhtors);
