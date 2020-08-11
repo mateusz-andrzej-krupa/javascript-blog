@@ -154,9 +154,9 @@
   }
   const addClickListenersToTags = function(){
   /* [DONE] find all links to tags */
-    const LinksToTags = document.querySelectorAll('a[href^="#tag-"]');
+    const linksToTags = document.querySelectorAll('a[href^="#tag-"]');
     /* [DONE] START LOOP: for each link */
-    for (const linkToTag of LinksToTags){
+    for (const linkToTag of linksToTags){
       /* [DONE] add tagClickHandler as event listener for that link */
       linkToTag.addEventListener('click', tagClickHandler);
       //console.log('this is link to tag', linkToTag);
@@ -181,7 +181,7 @@
       //console.log('autor to: ', author);
       /* replace ' ' with '_'  in author name */
       const author_name = author.replace(' ', '_');
-      //console.log(author_name);
+      //console.log('author_name', author_name);
       /* [DONE] generate HTML of the link */
       const authorLink = '<a href="#author_' + author_name + '"> by: ' + author + '</a>';
       //console.log('linki dla autorow:', authorLink);
@@ -204,21 +204,23 @@
     //console.log('this', clickedElement, 'ENDTHIS');
     const href = clickedElement.getAttribute('href');
     //console.log('AUTHOR href to: ', href);
-    const author = href.replace('#author', '');
+    const author = href.replace('#author_', '');
     //console.log('Autor bez #: ', author);
+    const authorWithout_ = author.replace('_', ' ');
+    //console.log('author bez _:', authorWithout_);
     const authorActives = document.querySelectorAll('a.active[href^="#author"]');
-    //console.log('autorzy aktywni: ', authorActives); // !!! wyswietla wartość "NodeList []"" !!!
+    //console.log('autorzy aktywni:', authorActives); // !!! wyswietla wartość "NodeList []"" !!!
     for (let authorDeactive of authorActives){
       authorDeactive.classList.remove('active');
-      //console.log('deaktywne tagiAutorow: ', authorDeactive); // wyswietla sie po drugim kliknieciu i wykonuje trzykrotnie; 
+      console.log('deaktywne tagiAutorow:', authorDeactive); // wyswietla sie po drugim kliknieciu i wykonuje trzykrotnie; 
     }
-    const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+    const authorLinks = document.querySelectorAll('article[href="' + href + '"]');
     //console.log('equal', authorLinks);
     for (let authorLink of authorLinks){
       authorLink.classList.add('active');
       console.log('autorzy aktywni: ', authorLink);
     }
-    generateTitleLinks('[data-author="' + author + '"]');
+    generateTitleLinks('[data-author="' + authorWithout_ + '"]');
     //console.log(generateTitleLinks);
   };
   const Auhtors = document.querySelectorAll('.post-author a');
