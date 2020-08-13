@@ -5,6 +5,7 @@
     optTitleSelector = '.post-title',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author';
+  optTagListSelector = '.tag.list';
   /* [DONE] Click listener on lef column */
   const titleClickHandler = function(){
     //console.log('this: ', this);
@@ -75,7 +76,11 @@
   };
   generateTitleLinks();
   /* --------------------------- */
-  const generateTags = function(){   
+  const generateTags = function(){ 
+
+    /* [NEW] create a new variable allTags with an empty array */
+    let allTags = [];
+
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     //console.log(articles);
@@ -100,12 +105,25 @@
         /* [DONE] add generated code to html variable */
         html = html + tagLink + (' ');
         //console.log('htmllink', html);
+
+        /* [NEW] check if this link is NOT already in allTags */
+        if(allTags.indexOf(tagLink) == -1){
+          /* [NEW] add generated code to allTags array */
+          allTags.push(tagLink);
+        
+        }
       /* [OK] END LOOP: for each tag */
       }
       /* [DONE] insert HTML of all the links into the tags wrapper */
       tagWrapper.innerHTML = html;
       //console.log('tagWrapper ', tagWrapper );    
-    /* [OK] END LOOP: for every article: */
+      /* [OK] END LOOP: for every article: */
+
+      /* [NEW] find list of tags in right column */
+      const tagList = document.querySelector('.tags');
+
+      /* [NEW] add html from allTags to tagList */
+      tagList.innerHTML = allTags.join(' ');
     }
   };
   generateTags();
@@ -238,4 +256,50 @@
     }
   };
   addClickListenersToAuthors();
+
+  /* do usuniecia - cwiczenia tablic------------------------------------ */
+  /*
+  const categories = [];
+  categories.push('animals');
+  categories.push('travel');
+  console.log('cat', categories);
+  const categoriesLength = categories.length;
+  console.log('catLength', categoriesLength);
+  const firstCategory = categories[0];
+  console.log('piersza kategoria:', firstCategory);
+  const indexOfSecondCategory = 1;
+  const secondCategory = categories[indexOfSecondCategory];
+  console.log('druga kategoria:', secondCategory);
+  const indexOfTravel = categories.indexOf('travel');
+  console.log('indexOfTravel to:', indexOfTravel);
+  const indexOfCars = categories.indexOf('cars');
+  console.log('czy w tablicy jest/sa cars? :', indexOfCars);
+  categories.push('fruits');
+  categories.push('food');
+  categories.push('phones');
+  console.log(categories);
+  const indexOfFruits = categories.indexOf('fruits');
+  console.log('indeks dla fruit', indexOfFruits);
+  const removedValues = categories.splice(indexOfFruits, 1);
+  console.log(categories);
+  const indexOfFood = categories.indexOf('food');
+  console.log('indexOfFood:', indexOfFood);
+  categories.splice(indexOfFood, 2);
+  console.log(categories);
+  const joinedArrayElement = categories.join('- ');
+  console.log(joinedArrayElement);
+  const html = '<ul><li>' +  categories.join('</li><li>')+ '</li></ul>';
+  console.log('html', html);
+  const topic = 'uno, dos, tres';
+  console.log('topic', topic);
+  const topicArray = topic.split(', ');
+  console.log(topicArray);
+  */
+  
+  //const keywords = ['travel', 'France'];
+  //keywords.push('Paris');
+  //console.log('keywords',keywords);
+
+
+
 }
