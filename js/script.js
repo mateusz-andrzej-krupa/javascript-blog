@@ -5,7 +5,8 @@
     optTitleSelector = '.post-title',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author';
-  optTagListSelector = '.tag.list';
+    //optTagListSelector = '.tag.list';
+
   /* [DONE] Click listener on lef column */
   const titleClickHandler = function(){
     //console.log('this: ', this);
@@ -78,9 +79,9 @@
   /* --------------------------- */
   const generateTags = function(){ 
 
-    /* [NEW] create a new variable allTags with an empty array */
-    let allTags = [];
-
+    /* [DONE] create a new variable allTags with an empty object */
+    let allTags = {};
+    console.log('obiekt tagow: ', allTags);
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     //console.log(articles);
@@ -101,16 +102,17 @@
       for (let tag of tagsArray){
         /* [DONE] generate HTML of the link */
         const tagLink = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
-        //console.log('tagLink', tagLink);     
+        console.log('tagLink', tagLink);     
         /* [DONE] add generated code to html variable */
         html = html + tagLink + (' ');
         //console.log('htmllink', html);
 
-        /* [NEW] check if this link is NOT already in allTags */
-        if(allTags.indexOf(tagLink) == -1){
-          /* [NEW] add generated code to allTags array */
-          allTags.push(tagLink);
-        
+        /* [DONE] check if this link is NOT already in allTags */
+        if(!allTags[tag]){
+          /* [DONE] add generated code to allTags array */
+          allTags[tag]= 1;
+        } else {
+          allTags[tag]++;
         }
       /* [OK] END LOOP: for each tag */
       }
@@ -123,8 +125,16 @@
       const tagList = document.querySelector('.tags');
 
       /* [NEW] add html from allTags to tagList */
-      tagList.innerHTML = allTags.join(' ');
+      //tagList.innerHTML = allTags.join(' ');
+      let allTagsHTML = '';
+      for(let tag in allTags){
+        allTagsHTML += tag + ' (' + allTags[tag] +') ';
+        //allTagsHTML += '${ tag } (${ allTags[tag] } ) ';
+      }
+      tagList.innerHTML = allTagsHTML;
+      //console.log(tagList);
     }
+    //console.log('obiekt linkow tagow: ', tagList);
   };
   generateTags();
   /* ----------------------------- */
@@ -180,6 +190,7 @@
       //console.log('this is link to tag', linkToTag);
       /* [OK] END LOOP: for each link */
     }
+
   };
   addClickListenersToTags();
   /*-------------------*/
@@ -189,7 +200,7 @@
     //console.log(articles);
     /* [OK] START LOOP: for every article: */
     for (let article of articles){
-      /* [---] find author wrapper */
+      /* [DONE] find author wrapper */
       const authorWrapper = article.querySelector(optArticleAuthorSelector);
       //console.log('wrappery autorow: ', authorWrapper);
       /* [DONE] make html variable with empty string */
@@ -280,7 +291,7 @@
   console.log(categories);
   const indexOfFruits = categories.indexOf('fruits');
   console.log('indeks dla fruit', indexOfFruits);
-  const removedValues = categories.splice(indexOfFruits, 1);
+  const removedValues = categories.splice(indexOfFruits,1);
   console.log(categories);
   const indexOfFood = categories.indexOf('food');
   console.log('indexOfFood:', indexOfFood);
@@ -294,12 +305,92 @@
   console.log('topic', topic);
   const topicArray = topic.split(', ');
   console.log(topicArray);
+    
+  const keywords = ['travel', 'France'];
+  keywords.push('Paris');
+  console.log('keywords',keywords);
   */
+
+  /* do usuniecia - cwiczenia objiektow------------------------------------ */
+  /*
+  const points = {};
+  console.log('points', points);
+  const playerColors = {eve: 'blue', bob: 'green'}
+  console.log('playerColors', playerColors);
+  const bestScores = {'!best': 123, '777': 118, 'Mr. doctor': 103};
+  console.log(bestScores);
+  points.eve = 2222;
+  points['bob'] = 987987;
+  console.log(points);
+  const evesPoints =points.eve;
+  console.log(evesPoints);
+  const bobsPoints=points['bob'];
+  console.log(bobsPoints);
+  const keyFor777 = '777';
+  const bestScore = bestScores[keyFor777];
+  console.log('bestScore:', bestScore);
+  points['eve']=17;
+  console.log('newPoints:', points);
+  points.bob=23;
+  console.log('newPoints:', points);
+  points.eve++;
+  console.log('newPoints:', points);
+  const eveKey = 'eve';
+  playerColors[eveKey]='black';
+  console.log(playerColors);
+  const keyBobExist = playerColors.hasOwnProperty('bob');
+  console.log('czy istnieje klucz o nazwie "bob"',keyBobExist);
+  const keyElyExist = playerColors.hasOwnProperty('ely');
+  console.log('czy istnieje klucz o nazwie "ely"',keyElyExist);
+  const address = {
+    street: 'mickiewicza',
+    building: 'A',
+    room: '55'
+  };
+  for (let key in address) {
+  console.log('klucz: ' + key + ' ma wartosc: ' + address[key]);
+  }
   
-  //const keywords = ['travel', 'France'];
-  //keywords.push('Paris');
-  //console.log('keywords',keywords);
-
-
-
+  const calculate = {
+    multiply: function(a, b){
+      return a * b;
+    }
+  };
+  
+  const multiplyOf = calculate.multiply(3, 5);
+  console.log('wynik mnozenia 2 x 5 =', multiplyOf);
+  
+  const fav= {
+    food:'pizza',
+    film: 'good father',
+    music: 'disco',
+  };
+  console.log(fav);
+  const newFav = {
+    sport: 'football',
+    food: 'coffee'
+  };
+  Object.assign( fav, newFav);
+  console.log(fav);
+  
+  const myHome = {
+    windows: 5,
+    rooms: {
+     livingroom: 1,
+     badroom: 2,
+     kitchen: 1,
+     corridor: 1,
+    },
+  };
+  console.log('myHome: ', myHome);
+  const yourHome = Object.assign({}, myHome);
+  console.log('yourHome: ', yourHome);
+  
+  yourHome.windows = 555;
+  yourHome.rooms.badroom = 1;
+  
+  console.log('myHome: ', myHome);
+  
+  console.log('yourHome: ', yourHome);
+  */
 }
