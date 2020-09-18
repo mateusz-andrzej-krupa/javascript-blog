@@ -102,11 +102,10 @@
       for (let tag of tagsArray){
         /* [DONE] generate HTML of the link */
         const tagLink = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
-        console.log('tagLink', tagLink);     
+        //console.log('tagLink', tagLink);     
         /* [DONE] add generated code to html variable */
         html = html + tagLink + (' ');
-        //console.log('htmllink', html);
-
+        //console.log('htmllink', html);~~
         /* [DONE] check if this link is NOT already in allTags */
         if(!allTags[tag]){
           /* [DONE] add generated code to allTags array */
@@ -128,8 +127,11 @@
       //tagList.innerHTML = allTags.join(' ');
       let allTagsHTML = '';
       for(let tag in allTags){
-        allTagsHTML += tag + ' (' + allTags[tag] +') ';
-        //allTagsHTML += '${ tag } (${ allTags[tag] } ) ';
+        //allTagsHTML += tag + ' (' + allTags[tag] +') ';
+        allTagsHTML += 
+        //<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>
+        `<li><a href="#tag-${ tag }"><span> ${ tag } ( ${ allTags[tag] } ) </span></a></li>`;
+        console.log('allTagsHTML',allTagsHTML);
       }
       tagList.innerHTML = allTagsHTML;
       //console.log(tagList);
@@ -180,6 +182,7 @@
   for(let tag of tags){
     tag.addEventListener('click', tagClickHandler);
   }
+
   const addClickListenersToTags = function(){
   /* [DONE] find all links to tags */
     const linksToTags = document.querySelectorAll('a[href^="#tag-"]');
