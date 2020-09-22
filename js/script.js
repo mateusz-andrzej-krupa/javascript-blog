@@ -4,8 +4,10 @@
     optTitleListSelector = '.titles',
     optTitleSelector = '.post-title',
     optArticleTagsSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post-author';
+    optArticleAuthorSelector = '.post-author',
     //optTagListSelector = '.tag.list';
+    optCloudClassCount = '5',
+    optCloudClassPrefix = 'tag-size-';
 
   /* [DONE] Click listener on lef column */
   const titleClickHandler = function(){
@@ -77,11 +79,39 @@
   };
   generateTitleLinks();
   /* --------------------------- */
+  const calculateTagsParams = function(tags) {
+    const params = { max: 0, min: 999999 };
+    for( let tag in tags ){
+      //console.log(`${tag} is used: ${allTags[tag]}`);
+      /*if(allTags[tag] > params.max) {
+        params.max = allTags[tag];
+        console.log(params);
+      }*/
+      params.max = tags[tag] > params.max ? tags[tag] : params.max;
+      //console.log(params.max);
+      //params.max = Math.max(allTags[tag], params.max);
+      //console.log(params.max);
+      params.min = tags[tag] < params.min ? tags[tag] : params.min;
+      //console.log('paramMin', params.min);
+    }
+    console.log(params);
+    return params;
+  };
+  const calculateTagClass = function(count, params) {
+    /*const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor( percentage * (optCloudClassCount -1));
+    */
+    const classNumber = Math.floor((( count - params.min) / (params.max - params.min)) * optCloudClassCount + 1 );
+    console.log('numer klasy', classNumber);
+    return;
+  };
   const generateTags = function(){ 
 
     /* [DONE] create a new variable allTags with an empty object */
     let allTags = {};
-    console.log('obiekt tagow: ', allTags);
+    //console.log('obiekt tagow: ', allTags);
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     //console.log(articles);
@@ -101,7 +131,7 @@
       /* [DONE] START LOOP: for each tag */
       for (let tag of tagsArray){
         /* [DONE] generate HTML of the link */
-        const tagLink = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+        const tagLink = `<li><a href="#tag-${ tag }">${ tag }</a></li>`;
         //console.log('tagLink', tagLink);     
         /* [DONE] add generated code to html variable */
         html = html + tagLink + (' ');
@@ -125,16 +155,18 @@
 
       /* [NEW] add html from allTags to tagList */
       //tagList.innerHTML = allTags.join(' ');
+      const tagsParams = calculateTagsParams(allTags);
+      //console.log('tagsParams', tagsParams);
       let allTagsHTML = '';
       for(let tag in allTags){
         //allTagsHTML += tag + ' (' + allTags[tag] +') ';
         allTagsHTML += 
         //<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>
-        `<li><a href="#tag-${ tag }"><span> ${ tag } ( ${ allTags[tag] } ) </span></a></li>`;
-        console.log('allTagsHTML',allTagsHTML);
+        `<li><a class="${ calculateTagClass(allTags[tag], tagsParams)} " href="#tag-${ tag }"><span> ${ tag } ( ${ allTags[tag] } ) </span></a></li>`;
+        //console.log('allTagsHTML',allTagsHTML);
       }
       tagList.innerHTML = allTagsHTML;
-      //console.log(tagList);
+      //console.log('lista tagow', tagList);
     }
     //console.log('obiekt linkow tagow: ', tagList);
   };
