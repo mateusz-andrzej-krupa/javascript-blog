@@ -6,23 +6,19 @@
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
     //optTagListSelector = '.tag.list';
-    optCloudClassCount = '5',
-    optCloudClassPrefix = 'tag-size-';
+    optCloudClassCount = '5';
+    //optCloudClassPrefix = 'tag-size-';
 
   /* [DONE] Click listener on lef column */
   const titleClickHandler = function(){
-    //console.log('this: ', this);
     event.preventDefault(); //ok-blokada przewijania strony do #
-    const clickedElement = this; //do czego to służy?
-    //console.log('Link was clicked!');
-    //console.log('event', event);
+    const clickedElement = this; 
     /* [DONE] remove class 'active' from all article links  */ 
     const activeLinks = document.querySelectorAll('.titles a.active');
     for(let activeLink of activeLinks){
       activeLink.classList.remove('active');
     }
     /* [DONE] add class 'active' to the clicked link */
-    //console.log('clickedElement', clickedElement);  //console.log('clickedElement+: ' + clickedElement);
     clickedElement.classList.add('active');
     /* [DONE] remove class 'active' from all articles */
     const activeArticles = document.querySelectorAll('article.active');
@@ -31,10 +27,8 @@
     }
     /* [DONE] get 'href' attribute from the clicked link */
     const articleHref = clickedElement.getAttribute('href');
-    //console.log('this is a articleHref:' , articleHref);
     /* [DONE] find the correct article using the selector (value of 'href' attribute) */
-    const article = document.querySelector(articleHref); //TEGO NIE KUMAM
-    //console.log(article);
+    const article = document.querySelector(articleHref);
     /* [DONE] add class 'active' to the correct article */ 
     article.classList.add('active');
   };
@@ -82,30 +76,16 @@
   const calculateTagsParams = function(tags) {
     const params = { max: 0, min: 999999 };
     for( let tag in tags ){
-      //console.log(`${tag} is used: ${allTags[tag]}`);
-      /*if(allTags[tag] > params.max) {
-        params.max = allTags[tag];
-        console.log(params);
-      }*/
       params.max = tags[tag] > params.max ? tags[tag] : params.max;
-      //console.log(params.max);
-      //params.max = Math.max(allTags[tag], params.max);
-      //console.log(params.max);
       params.min = tags[tag] < params.min ? tags[tag] : params.min;
-      //console.log('paramMin', params.min);
     }
-    console.log(params);
+    //console.log(params);
     return params;
   };
   const calculateTagClass = function(count, params) {
-    /*const normalizedCount = count - params.min;
-    const normalizedMax = params.max - params.min;
-    const percentage = normalizedCount / normalizedMax;
-    const classNumber = Math.floor( percentage * (optCloudClassCount -1));
-    */
     const classNumber = Math.floor((( count - params.min) / (params.max - params.min)) * optCloudClassCount + 1 );
-    console.log('numer klasy', classNumber);
-    return;
+    //console.log('numer klasy', classNumber);
+    return classNumber;
   };
   const generateTags = function(){ 
 
@@ -162,7 +142,7 @@
         //allTagsHTML += tag + ' (' + allTags[tag] +') ';
         allTagsHTML += 
         //<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>
-        `<li><a class="${ calculateTagClass(allTags[tag], tagsParams)} " href="#tag-${ tag }"><span> ${ tag } ( ${ allTags[tag] } ) </span></a></li>`;
+        ` <li><a class ="tagClass${ calculateTagClass(allTags[tag], tagsParams) }"  href="#tag-${ tag }"><span> ${ tag } </span></a></li>`;
         //console.log('allTagsHTML',allTagsHTML);
       }
       tagList.innerHTML = allTagsHTML;

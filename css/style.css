@@ -107,4 +107,25 @@ body {
 .post-tags p {
   margin: 0 10px 0 0;
 }
+
+
+.tagClass1 {
+  font-size: 14px;
+}
+.tagClass2 {
+  font-size: 18px;
+}
+.tagClass3 {
+  font-size: 22px;
+}
+.tagClass4 {
+  font-size: 28px;
+}
+.tagClass5 {
+  font-size: 32px;
+}
+.tagClass6 {
+  font-size: 34px;
+}
+
 /*# sourceMappingURL=style.css.map */
