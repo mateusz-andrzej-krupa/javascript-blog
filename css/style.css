@@ -83,7 +83,9 @@ body {
 
 /* Authors */
 .authors li {
-  margin-bottom: 12px;
+  /*margin-bottom: 55px;*/
+  list-style-type: circle;
+
 }
 
 /* Post */

@@ -88,7 +88,6 @@
     return classNumber;
   };
   const generateTags = function(){ 
-
     /* [DONE] create a new variable allTags with an empty object */
     let allTags = {};
     //console.log('obiekt tagow: ', allTags);
@@ -210,33 +209,41 @@
   addClickListenersToTags();
   /*-------------------*/
   const generateAuthors = function(){
-  /* [DONE] find all articles */
+    /* [NEW] create a new variable allAuthors with an empty array */
+    let allAuthors = {};
+    /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
-    //console.log(articles);
     /* [OK] START LOOP: for every article: */
     for (let article of articles){
       /* [DONE] find author wrapper */
       const authorWrapper = article.querySelector(optArticleAuthorSelector);
-      //console.log('wrappery autorow: ', authorWrapper);
       /* [DONE] make html variable with empty string */
       let html = '';
       /* [DONE] get author from data-autor attribute */
       const author = article.getAttribute('data-author');
-      //console.log('autor to: ', author);
       /* replace ' ' with '_'  in author name */
       const author_name = author.replace(' ', '_');
-      //console.log('author_name', author_name);
       /* [DONE] generate HTML of the link */
-      const authorLink = '<a href="#author_' + author_name + '"> by: ' + author + '</a>';
-      //console.log('linki dla autorow:', authorLink);
+      const authorLink = `<li><a href="#author_${ author_name }"> by: ${ author }</a></li>`;
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
-      //console.log('html dla autorow', html);
+      /* [NEW] check if this link is NOT already in allAuthors */
+      if(!allAuthors[authorLink]){
+        /* [NEW] add generated code to allTags array */
+        allAuthors[author] = 1;
+      } else {
+        allAuthors[auhtor]++;
+      }
       /* [DONE] insert HTML of all the links into the tags wrapper */
       authorWrapper.innerHTML = html;
-      //console.log('html: ', html);
-      /* [OK] END LOOP: for every article: */
-    }
+      //console.log(html);
+    };
+    
+    /* [NEW] find list of authors in right column */
+    const authorList = document.querySelector('.authors');
+    /* [NEW] add html from allauthors to tagList */
+    //authorList.innerHTML = allAuthors.join(' ');
+    console.log(allAuthors);
   };
   generateAuthors();
   /* ----------------------------- */
