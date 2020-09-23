@@ -42,8 +42,6 @@
     let html = '';
     /* [DONE] for all articles: */ 
     const articles = document.querySelectorAll(optArticleSelector + CustomSelector);
-    //console.log('to sa artykuły ', articles);
-    //console.log('a to sa customSelector:', CustomSelector);
     for (let article of articles){
       /* [DONE] get a id of article and save as a const */
       const articleId = article.getAttribute('Id');
@@ -55,9 +53,6 @@
       const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
       //console.log('HTML code: ', linkHTML);    
       /* [DONE] display links in a  column */     
-      //[v1] titleLinks.innerHTML = titleLinks.innerHTML + linkHTML;
-      //[v2] titleLinks.insertAdjacentHTML("beforeend", linkHTML);
-      //[v3]:
       html = html + linkHTML;
       //console.log('htmllink', html);
       //console.log(optTitleSelector, CustomSelector);
@@ -138,14 +133,13 @@
       //console.log('tagsParams', tagsParams);
       let allTagsHTML = '';
       for(let tag in allTags){
-        //allTagsHTML += tag + ' (' + allTags[tag] +') ';
+
         allTagsHTML += 
-        //<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>
         ` <li><a class ="tagClass${ calculateTagClass(allTags[tag], tagsParams) }"  href="#tag-${ tag }"><span> ${ tag } </span></a></li>`;
         //console.log('allTagsHTML',allTagsHTML);
       }
       tagList.innerHTML = allTagsHTML;
-      //console.log('lista tagow', tagList);
+      console.log('lista tagow', tagList);
     }
     //console.log('obiekt linkow tagow: ', tagList);
   };
@@ -221,29 +215,37 @@
       let html = '';
       /* [DONE] get author from data-autor attribute */
       const author = article.getAttribute('data-author');
-      /* replace ' ' with '_'  in author name */
+      /* [DONE] replace ' ' with '_'  in author name */
       const author_name = author.replace(' ', '_');
       /* [DONE] generate HTML of the link */
-      const authorLink = `<li><a href="#author_${ author_name }"> by: ${ author }</a></li>`;
+      const authorLink = `<li><a href="#author_${ author_name }"> by: ${ author } </a></li>`;
+      //console.log(authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
       /* [NEW] check if this link is NOT already in allAuthors */
-      if(!allAuthors[authorLink]){
+      if(!allAuthors[author]){
         /* [NEW] add generated code to allTags array */
         allAuthors[author] = 1;
       } else {
-        allAuthors[auhtor]++;
+        allAuthors[author]++;
       }
       /* [DONE] insert HTML of all the links into the tags wrapper */
       authorWrapper.innerHTML = html;
-      //console.log(html);
-    };
+      //console.log('wrapper', html);
+    }
     
     /* [NEW] find list of authors in right column */
     const authorList = document.querySelector('.authors');
     /* [NEW] add html from allauthors to tagList */
-    //authorList.innerHTML = allAuthors.join(' ');
-    console.log(allAuthors);
+    let allAuthorHTML = '';
+    
+    for(let author in allAuthors){
+      const author_name = author.replace(' ', '_');
+      allAuthorHTML += `<li><a href="#author_${ author_name }"><span> ${ author } (${ allAuthors[author] }) </span></a></li>`;
+      //console.log(allAuthorHTML);
+    }
+    authorList.innerHTML = allAuthorHTML;
+    //console.log('lista autorow: ', authorList);
   };
   generateAuthors();
   /* ----------------------------- */
@@ -405,6 +407,14 @@
     },
   };
   console.log('myHome: ', myHome);
+  const count = myHome.rooms.livingroom+myHome.rooms.badroom+myHome.rooms.kitchen+myHome.rooms.corridor;
+  console.log('count: ', count);
+  for( let conuntLoop in myHome ){
+    conuntLoop = myHome.rooms;
+    console.log('okien jest: ', conuntLoop);
+  }
+
+  
   const yourHome = Object.assign({}, myHome);
   console.log('yourHome: ', yourHome);
   
