@@ -1,5 +1,10 @@
 //'use strict';
 {
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
+  }
   const optArticleSelector = '.post',
     optTitleListSelector = '.titles',
     optTitleSelector = '.post-title',
@@ -50,7 +55,9 @@
       const articleTitle = article.querySelector(optTitleSelector).innerHTML;
       //console.log('tytuł artykułu: ', articleTitle);     
       /* [DONE] generate HTML code and save as a const */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTMLData = {id: articleId, title: articleTitle};
+      const linkHTML = templates.articleLink(linkHTMLData);
       //console.log('HTML code: ', linkHTML);    
       /* [DONE] display links in a  column */     
       html = html + linkHTML;
@@ -105,7 +112,9 @@
       /* [DONE] START LOOP: for each tag */
       for (let tag of tagsArray){
         /* [DONE] generate HTML of the link */
-        const tagLink = `<li><a href="#tag-${ tag }">${ tag }</a></li>`;
+        //const tagLink = `<li><a href="#tag-${ tag }">${ tag }</a></li>`;
+        const linkHTMLData = {id: tag, title: tag};
+        const tagLink = templates.tagLink(linkHTMLData); 
         //console.log('tagLink', tagLink);     
         /* [DONE] add generated code to html variable */
         html = html + tagLink + (' ');
@@ -139,7 +148,7 @@
         //console.log('allTagsHTML',allTagsHTML);
       }
       tagList.innerHTML = allTagsHTML;
-      console.log('lista tagow', tagList);
+      //console.log('lista tagow', tagList);
     }
     //console.log('obiekt linkow tagow: ', tagList);
   };
@@ -219,6 +228,8 @@
       const author_name = author.replace(' ', '_');
       /* [DONE] generate HTML of the link */
       const authorLink = `<li><a href="#author_${ author_name }"> by: ${ author } </a></li>`;
+      const linkHTMLData = {id: authorWrapper, title: author};
+      const linkHTML = templates.authorLink(linkHTMLData);
       //console.log(authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
@@ -400,19 +411,32 @@
   const myHome = {
     windows: 5,
     rooms: {
-     livingroom: 1,
-     badroom: 2,
-     kitchen: 1,
-     corridor: 1,
+      livingroom: 1,
+      badroom: 2,
+      kitchen: 1,
+      corridor: 1,
     },
   };
-  console.log('myHome: ', myHome);
-  const count = myHome.rooms.livingroom+myHome.rooms.badroom+myHome.rooms.kitchen+myHome.rooms.corridor;
-  console.log('count: ', count);
-  for( let conuntLoop in myHome ){
-    conuntLoop = myHome.rooms;
-    console.log('okien jest: ', conuntLoop);
+  //console.log('myHome: ', myHome);
+  //const count = myHome.rooms.livingroom+myHome.rooms.badroom+myHome.rooms.kitchen+myHome.rooms.corridor;
+  //console.log('count: ', count);
+  
+  let allWindows = 0;
+  for( let window in myHome ){
+    allWindows += parseFloat(myHome[window]);
+    console.log('okien jest: ', allWindows);
   }
+  console.log('wszystkich okien jest: ', allWindows);
+
+  ---sum of values in object's element---
+  const object = { a: 1, b: 2, c: 3 };
+  let sum = 0;
+  for (let property in object) {    
+    sum += parseFloat(object[property]);
+    console.log('kazda iteracja', sum);
+  }
+  console.log('poza petla', sum);
+  
 
   
   const yourHome = Object.assign({}, myHome);
@@ -425,4 +449,6 @@
   
   console.log('yourHome: ', yourHome);
   */
+ 
+  
 }
