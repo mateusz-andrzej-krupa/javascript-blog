@@ -83,9 +83,7 @@ body {
 
 /* Authors */
 .authors li {
-  /*margin-bottom: 55px;*/
-  list-style-type: circle;
-
+  margin-bottom: 12px;
 }
 
 /* Post */
@@ -99,7 +97,6 @@ body {
 
 .post-author {
   font-style: italic;
-  list-style-type: none;
 }
 
 .post-tags {
@@ -111,6 +108,7 @@ body {
   margin: 0 10px 0 0;
 }
 
+/* tagsCloud */
 
 .tagClass1 {
   font-size: 14px;

@@ -1,10 +1,12 @@
 //'use strict';
 {
+  
   const templates = {
     articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
     tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
     authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
-  }
+  };
+  
   const optArticleSelector = '.post',
     optTitleListSelector = '.titles',
     optTitleSelector = '.post-title',
@@ -61,6 +63,7 @@
       //console.log('HTML code: ', linkHTML);    
       /* [DONE] display links in a  column */     
       html = html + linkHTML;
+      //console.log(html);
       //console.log('htmllink', html);
       //console.log(optTitleSelector, CustomSelector);
     }
@@ -112,12 +115,12 @@
       /* [DONE] START LOOP: for each tag */
       for (let tag of tagsArray){
         /* [DONE] generate HTML of the link */
-        //const tagLink = `<li><a href="#tag-${ tag }">${ tag }</a></li>`;
+        //const linkHTML = `<li><a href="#tag-${ tag }">${ tag }</a></li>`;
         const linkHTMLData = {id: tag, title: tag};
-        const tagLink = templates.tagLink(linkHTMLData); 
-        //console.log('tagLink', tagLink);     
+        const linkHTML = templates.tagLink(linkHTMLData); 
+        //onsole.log('tagLink', linkHTML);     
         /* [DONE] add generated code to html variable */
-        html = html + tagLink + (' ');
+        html = html + linkHTML + (' ');
         //console.log('htmllink', html);~~
         /* [DONE] check if this link is NOT already in allTags */
         if(!allTags[tag]){
@@ -142,7 +145,6 @@
       //console.log('tagsParams', tagsParams);
       let allTagsHTML = '';
       for(let tag in allTags){
-
         allTagsHTML += 
         ` <li><a class ="tagClass${ calculateTagClass(allTags[tag], tagsParams) }"  href="#tag-${ tag }"><span> ${ tag } </span></a></li>`;
         //console.log('allTagsHTML',allTagsHTML);
@@ -225,11 +227,11 @@
       /* [DONE] get author from data-autor attribute */
       const author = article.getAttribute('data-author');
       /* [DONE] replace ' ' with '_'  in author name */
-      const author_name = author.replace(' ', '_');
+      const authorName = author.replace(' ', '_');
       /* [DONE] generate HTML of the link */
-      const authorLink = `<li><a href="#author_${ author_name }"> by: ${ author } </a></li>`;
-      const linkHTMLData = {id: authorWrapper, title: author};
-      const linkHTML = templates.authorLink(linkHTMLData);
+      const authorLink = `<li><a href="#author_${ authorName }"> by: ${ author } </a></li>`;
+      //const linkHTMLData = {id: authorWrapper, title: author};
+      //const linkHTML = templates.authorLink(linkHTMLData);
       //console.log(authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
@@ -251,8 +253,8 @@
     let allAuthorHTML = '';
     
     for(let author in allAuthors){
-      const author_name = author.replace(' ', '_');
-      allAuthorHTML += `<li><a href="#author_${ author_name }"><span> ${ author } (${ allAuthors[author] }) </span></a></li>`;
+      const authorName = author.replace(' ', '_');
+      allAuthorHTML += `<li><a href="#author_${ authorName }"><span> ${ author } (${ allAuthors[author] }) </span></a></li>`;
       //console.log(allAuthorHTML);
     }
     authorList.innerHTML = allAuthorHTML;
