@@ -4,6 +4,7 @@
   const templates = {
     articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
     tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
     authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML)
   };
   
@@ -143,14 +144,23 @@
       //tagList.innerHTML = allTags.join(' ');
       const tagsParams = calculateTagsParams(allTags);
       //console.log('tagsParams', tagsParams);
-      let allTagsHTML = '';
+      //let allTagsHTML = '';
+      let allTagsData = {tag: []};
+      //let allTagsData = {tags: []};
       for(let tag in allTags){
-        allTagsHTML += 
-        ` <li><a class ="tagClass${ calculateTagClass(allTags[tag], tagsParams) }"  href="#tag-${ tag }"><span> ${ tag } </span></a></li>`;
+        //allTagsHTML += 
+        //` <li><a class ="tagClass${ calculateTagClass(allTags[tag], tagsParams) }"  href="#tag-${ tag }"><span> ${ tag } </span></a></li>`;
         //console.log('allTagsHTML',allTagsHTML);
+        allTagsData.tag.push({
+          tag: tag,
+          count: allTags[tag],
+          className: calculateTagClass(allTags[tag], tagsParams)
+        });
+        //console.log('allTagsHTML',allTagsData);
       }
-      tagList.innerHTML = allTagsHTML;
-      //console.log('lista tagow', tagList);
+      //tagList.innerHTML = allTagsHTML;
+      tagList.innerHTML = templates.tagCloudLink(allTagsData);
+      //console.log('lista tagow', allTagsData);
     }
     //console.log('obiekt linkow tagow: ', tagList);
   };
@@ -232,7 +242,7 @@
       //const authorLink = `<li><a href="#author_${ authorName }"> by: ${ author } </a></li>`;
       const linkHTMLData = {id: authorName, title: author};
       const authorLink = templates.authorLink(linkHTMLData);
-      console.log(authorLink);
+      //console.log(authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
       /* [NEW] check if this link is NOT already in allAuthors */
