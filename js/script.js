@@ -229,10 +229,10 @@
       /* [DONE] replace ' ' with '_'  in author name */
       const authorName = author.replace(' ', '_');
       /* [DONE] generate HTML of the link */
-      const authorLink = `<li><a href="#author_${ authorName }"> by: ${ author } </a></li>`;
-      //const linkHTMLData = {id: authorWrapper, title: author};
-      //const linkHTML = templates.authorLink(linkHTMLData);
-      //console.log(authorLink);
+      //const authorLink = `<li><a href="#author_${ authorName }"> by: ${ author } </a></li>`;
+      const linkHTMLData = {id: authorName, title: author};
+      const authorLink = templates.authorLink(linkHTMLData);
+      console.log(authorLink);
       /* [DONE] add generated code to html variable */
       html = html + authorLink;
       /* [NEW] check if this link is NOT already in allAuthors */
